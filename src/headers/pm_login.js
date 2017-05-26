@@ -1,10 +1,11 @@
 import React  from 'react';
 import { Row, Col } from 'antd';
 import '../App.css';
-import { Menu, Icon ,Tabs,message,Form,Modal,Input,Button} from 'antd';
+import { Header,Menu, Icon ,Tabs,message,Form,Modal,Input,Button} from 'antd';
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
-class PCLogin extends React.Component{
+
+class PMLogin extends React.Component{
 	constructor(){
 		super();
 		this.state={
@@ -79,12 +80,9 @@ class PCLogin extends React.Component{
 				</Menu.Item>
 		;
 		return (
-      <header>
+
       <Row>
-            <Col span={2}> </Col>
-            <Col span={4}>
-            </Col>
-            <Col span={16}>
+            <Col span={24}>
               <Menu mode="horizontal" onClick={this.handleClick.bind(this)} >
                 <Menu.Item key="job">   <Icon type="appstore" />事项管理</Menu.Item>
                 <Menu.Item key="team">   <Icon type="team" />团队管理</Menu.Item>
@@ -113,10 +111,9 @@ class PCLogin extends React.Component{
 							</Col>
             <Col span={2}></Col>
           </Row>
-      </header>
 
 			);
 		};
 	}
 
-	export default  PCLogin = Form.create({})(PCLogin);
+	export default  PMLogin = Form.create({})(PMLogin);
