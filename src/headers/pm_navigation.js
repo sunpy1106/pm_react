@@ -4,15 +4,15 @@ import '../App.css';
 import { Header,Menu, Icon ,Tabs,message,Form,Modal,Input,Button} from 'antd';
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
+import { Link } from 'react-router';
 
-class PMLogin extends React.Component{
+class Navigation extends React.Component{
 	constructor(){
 		super();
 		this.state={
 			modalVisible:false,
 			userName:'',
 			hasLogined:false,
-
 		}
 	}
 	componentWillMount(){
@@ -84,8 +84,12 @@ class PMLogin extends React.Component{
       <Row>
             <Col span={24}>
               <Menu mode="horizontal" onClick={this.handleClick.bind(this)} >
-                <Menu.Item key="job">   <Icon type="appstore" />事项管理</Menu.Item>
-                <Menu.Item key="team">   <Icon type="team" />团队管理</Menu.Item>
+                <Menu.Item key="job">
+										<Link  to="job"><Icon type="appstore" />事项管理</Link>									 
+								</Menu.Item>
+                <Menu.Item key="team">
+										<Link  to="team"><Icon type="team" />团队管理</Link>
+								</Menu.Item>
 
   							{userShow}
               </Menu>
@@ -116,4 +120,4 @@ class PMLogin extends React.Component{
 		};
 	}
 
-	export default  PMLogin = Form.create({})(PMLogin);
+	export default  Navigation = Form.create({})(Navigation);

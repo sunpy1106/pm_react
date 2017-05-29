@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
-import PMLogin from './headers/pm_login';
+import Navigation from './headers/pm_navigation';
 import { Layout} from 'antd';
-import PMBody from './body/pm_body';
+
 
 const { Header, Content, Footer } = Layout;
 
 class App extends Component {
   render() {
+    console.log(this.props.children);
     return (
       <Layout>
         <Header  className="header">
-          <PMLogin />
+          <Navigation />
         </Header>
-        <PMBody />
+        {this.props.children}
         <Footer style={{ textAlign: 'center' }}>
           Ant Design ©2016 Created by Ant UED
         </Footer>
