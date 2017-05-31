@@ -16,7 +16,7 @@ class App extends Component {
         </Header>
         {this.props.children}
         <Footer style={{ textAlign: 'center' }}>
-          Ant Design ©2016 Created by Ant UED
+          实施管理平台 ©2017 由中国建设银行数据仓库项目组创建
         </Footer>
       </Layout>
 

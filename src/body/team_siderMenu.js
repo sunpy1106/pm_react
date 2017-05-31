@@ -23,7 +23,7 @@ class  TeamSiderMenu extends React.Component{
     console.log({teams})
     const teamList = teams.length?
     teams.map((teamItem,index) => (
-      <SubMenu key={teamItem.teamId} title={<span><Icon type="appstore" />{teamItem.teamName}</span>}>
+      <SubMenu key={teamItem.teamId} title={<span><Icon type="team" />{teamItem.teamName}</span>}>
       </SubMenu>
     ))
     :

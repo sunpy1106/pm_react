@@ -38,8 +38,6 @@ class Navigation extends React.Component{
 	handleSubmit(e){
 		e.preventDefault();
 		var formData = this.props.form.getFieldsValue();
-		console.log(formData.userName);
-		console.log(formData.password);
 		var myFetchOptions={
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' ,'Accept': 'application/json'},
@@ -55,20 +53,20 @@ class Navigation extends React.Component{
 		.then(json => {
 				this.setState({userName:json.account});
 				this.setState({hasLogined:true});
-				console.log(json);
+
 			}
 		).catch(function(){
 			console.log("error");
 		});
 		message.success('success');
 		this.setModalVisible(false);
-		console.log('fetch success');
+
 
 	}
 
 
 	render(){
-		console.log('userName: ' +this.state.userName);
+		//console.log('userName: ' +this.state.userName);
 		const {getFieldProps} = this.props.form;
 		const userShow = this.state.hasLogined?
 		<Menu.Item key="logout" className="register">
@@ -85,7 +83,7 @@ class Navigation extends React.Component{
             <Col span={24}>
               <Menu mode="horizontal" onClick={this.handleClick.bind(this)} >
                 <Menu.Item key="job">
-										<Link  to="job"><Icon type="appstore" />事项管理</Link>									 
+										<Link  to="job"><Icon type="appstore" />事项管理</Link>
 								</Menu.Item>
                 <Menu.Item key="team">
 										<Link  to="team"><Icon type="team" />团队管理</Link>
