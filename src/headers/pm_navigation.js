@@ -1,10 +1,11 @@
 import React  from 'react';
 import { Row, Col } from 'antd';
+import { Link } from 'react-router';
 import '../App.css';
 import { Header,Menu, Icon ,Tabs,message,Form,Modal,Input,Button} from 'antd';
+
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
-import { Link } from 'react-router';
 
 class Navigation extends React.Component{
 	constructor(){
@@ -86,7 +87,7 @@ class Navigation extends React.Component{
 										<Link  to="job"><Icon type="appstore" />事项管理</Link>
 								</Menu.Item>
                 <Menu.Item key="team">
-										<Link  to="team"><Icon type="team" />团队管理</Link>
+										<Link  to={ { pathname:'/team',state:{userId:'123'} } } ><Icon type="team" />团队管理</Link>
 								</Menu.Item>
 
   							{userShow}

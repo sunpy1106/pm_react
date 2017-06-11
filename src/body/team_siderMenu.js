@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { SubMenu } = Menu;
 import '../App.css';
+
+const { SubMenu } = Menu;
 
 class  TeamSiderMenu extends React.Component{
   constructor(){

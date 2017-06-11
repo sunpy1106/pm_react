@@ -87,13 +87,14 @@ export default class UserTable extends React.Component {
     }];
 
     this.state = {
-      dataSource:this.props.memberList,
-      count:this.props.memberList.length
+      dataSource:[],
+      count:0
     };
 
     console.log('datasource:');
     console.log(this.state.dataSource);
   }
+
   onCellChange = (index, key) => {
     return (value) => {
       const dataSource = [...this.state.dataSource];
@@ -119,12 +120,10 @@ export default class UserTable extends React.Component {
       count: count + 1,
     });
   }
-  componentWillReceiveProps(nextProps){
-    this.setState(
-      {dataSource:nextProps.memberList,count:nextProps.memberList.length}
-    );
-  }
+
   render() {
+    console.log("userTable props");
+    console.log(this.props);
     const { dataSource } = this.state;
     const columns = this.columns;
     return (

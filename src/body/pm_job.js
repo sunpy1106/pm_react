@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Layout, Breadcrumb} from 'antd';
-const {  Content} = Layout;
 import '../App.css';
 import JobSiderMenu from './job_siderMenu';
+
 const {  Sider } = Layout;
+const {  Content} = Layout;
 class  Job extends React.Component{
   render(){
     return(

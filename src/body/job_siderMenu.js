@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
-const { SubMenu } = Menu;
 import '../App.css';
+const { SubMenu } = Menu;
 
 class  JobSiderMenu extends React.Component{
   render(){
@@ -16,11 +16,8 @@ class  JobSiderMenu extends React.Component{
            <Menu.Item key="delayTask">延迟</Menu.Item>
            <Menu.Item key="unfinishedTask">未完成</Menu.Item>
            <Menu.Item key="finishedTask">已完成</Menu.Item>
-
          </SubMenu>
       </Menu>
-
-
     );
   }
 }
