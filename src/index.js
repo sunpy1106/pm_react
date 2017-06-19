@@ -2,23 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './index.css';
-import {
-  Router,
-  Route,
-  hashHistory,
-  IndexRoute
-} from 'react-router';
-import Job from './body/pm_job';
-import Team from './body/pm_team';
-import UserTable from './body/pm_user_table';
+import { Provider } from 'react-redux';
+import { createStore ,compose,applyMiddleware} from 'redux';
+import  reducers from './reducers';
+import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+
+
+const initState={
+  curTeam:'',
+  teamList:[]
+}
+const  store = createStore(reducers,initState,applyMiddleware(thunk,logger));
 
 ReactDOM.render(
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <Route path="/job" component={Job} />
-      <Route path="/team" component={Team} />
-        <Route path="/team/:teamId" component={UserTable}/>
-    </Route>
-  </Router>,
+  <Provider store = {store}>
+    <div>
+      <App />
+    </div>
+  </Provider>,
   document.getElementById('root')
 );
