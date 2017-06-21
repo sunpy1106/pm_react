@@ -1,13 +1,5 @@
 import TeamApi from '../api/teamApi';
 
-export const USER_LOGIN=(userName,password)=>(
-  {
-    type:'USER_LOGIN',
-    user:userName,
-    passwd:password
-  }
-)
-
 export const SHOW_TEAM= (teamId) => (
   {
     type:'SHOW_TEAM',
@@ -21,6 +13,15 @@ export function loadTeamsSuccess(teams){
     teams
   }
 }
+
+export function addMemberSuccess(teamId,memberInfo){
+  return{
+    type:'ADD_MEMBER_SUCCESS',
+    memberInfo,
+    teamId
+  }
+}
+
 export function CLICK_NAV  (query,userId){
   return function(dispatch){
       return TeamApi.getAllTeams(userId).then(teams =>{
@@ -29,5 +30,32 @@ export function CLICK_NAV  (query,userId){
         throw(error);
       })
     }
+
+}
+
+export function ADD_SUB_TEAM(teamId,teamInfo){
+
+}
+
+export function DELETE_TEAM(teamId,subTeamId){
+
+}
+
+export function ADD_MEMBER(teamId,memberInfo){
+  console.log('ADD_MEMBER');
+  console.log(teamId);
+  console.log(memberInfo);
+  return function(dispatch){
+    return TeamApi.addMember(teamId,memberInfo).then(response=>{
+      console.log(response);
+      dispatch(addMemberSuccess(teamId,response));
+    })
+  }
+}
+
+export function DELETE_MEMBER(teamId,userId){
+
+}
+export function UPDATE_MEMBER(teamId,memeber){
 
 }

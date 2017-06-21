@@ -1,5 +1,8 @@
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 import React, { Component } from 'react';
+import {Form,Modal} from 'antd';
+
+const FormItem = Form.Item;
 
 class EditableCell extends React.Component {
   state = {
@@ -52,7 +55,7 @@ class EditableCell extends React.Component {
   }
 }
 
-export default class UserTable extends React.Component {
+ class UserTable extends React.Component {
   constructor(props) {
     super(props);
     this.columns = [{
@@ -87,8 +90,10 @@ export default class UserTable extends React.Component {
     }];
 
     this.state = {
-      dataSource:this.props.dataSource,
-      count:4
+      dataSource:this.props.dataSource.teamMember,
+      curTeam:this.props.dataSource.teamId,
+      count:4,
+      modalVisible:false
     };
 
     console.log('datasource:');
@@ -107,41 +112,60 @@ export default class UserTable extends React.Component {
     dataSource.splice(index, 1);
     this.setState({ dataSource });
   }
+
   handleAdd = () => {
-    console.log('handleAdd');
-    const {  dataSource,count } = this.state;
-    console.log(dataSource);
-    console.log(count);
-    const newData = {
-      key: count,
-      userNickName: `Edward King ${count}`,
-      userName: '刘飞',
-      role: '组员'
-    };
-    console.log(newData);
-    this.setState({
-      dataSource: [...dataSource, newData],
-      count: count + 1
-    });
-    console.log(this.state);
+    this.setState({modalVisible:true});
   }
+
   componentWillReceiveProps(nextProps){
     this.setState({
-      dataSource:nextProps.dataSource
-
+      dataSource:nextProps.dataSource.teamMember,
+      curTeam:nextProps.dataSource.teamId
     })
   }
+
+  setModalVisible(value){
+    this.setState({modalVisible:value});
+  }
+
+
+  handleSubmit(e){
+    e.preventDefault();
+    var formData = this.props.form.getFieldsValue();
+    console.log(formData);
+    var actions = this.props.actions;
+    actions.ADD_MEMBER(this.state.curTeam,formData);
+
+    this.setState({modalVisible:false});
+  }
+
   render() {
+    let {getFieldProps} = this.props.form;
     console.log("userTable props");
     console.log(this.props);
-    console.log(this.state);
-    const { dataSource } = this.state;;
+    const dataSource  = this.state.dataSource;
+    console.table(dataSource);
     const columns = this.columns;
     return (
       <div>
-        <Button className="editable-add-btn" onClick={this.handleAdd}>Add</Button>
+        <Button className="editable-add-btn" onClick={this.handleAdd}>添加成员</Button>
         <Table bordered dataSource={dataSource} columns={columns} />
+        <Modal title="添加成员" wrapClassName="vertical-center-modal" visible={this.state.modalVisible}
+                  onCancel={()=> this.setModalVisible(false)}
+                  onOk={ ()=> this.setModalVisible(false)} okText="关闭" >
+          <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
+            <FormItem label="姓名">
+              <Input placeholder="请输入成员姓名" {...getFieldProps('r_userName')} />
+            </FormItem>
+            <FormItem label="角色">
+              <Input type="teamLeader" placeholder="请输入成员角色" {...getFieldProps('r_role')} />
+            </FormItem>
+            <Button type="primary" htmlType="submit" >提交</Button>
+          </Form>
+        </Modal>
       </div>
     );
   }
 }
+
+export default UserTable = Form.create()(UserTable);

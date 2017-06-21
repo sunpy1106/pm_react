@@ -7,6 +7,23 @@ class TeamApi{
               return error;
             });
   }
+
+  static addMember(teamId,memberInfo){
+    const request = new Request('http://localhost:3001/team/'+teamId, {
+      method: 'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body: JSON.stringify(memberInfo)
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+
+  }
 }
 
 

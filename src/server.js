@@ -50,6 +50,13 @@ app.post('/login', function(request, response){
   response.send(request.body);    // echo the result back
 });
 
+app.post('/team/:id',function(request,response){
+  console.log(request.body);
+  var val = request.body;
+  val.userId = '12314';
+  console.log(val);
+  response.json(val);
+});
 app.get('/teams',(request,response)=>{
   console.log(request.query.userId);
   response.json(
