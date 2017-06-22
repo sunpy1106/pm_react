@@ -22,6 +22,13 @@ export function addMemberSuccess(teamId,memberInfo){
   }
 }
 
+export function delMemberSuccess(teamId,userId){
+  return {
+    type:'DELETE_MEMBER_SUCCESS',
+    teamId,
+    userId
+  }
+}
 export function CLICK_NAV  (query,userId){
   return function(dispatch){
       return TeamApi.getAllTeams(userId).then(teams =>{
@@ -33,8 +40,22 @@ export function CLICK_NAV  (query,userId){
 
 }
 
-export function ADD_SUB_TEAM(teamId,teamInfo){
+export function addSubTeamSuccess(teamId,teamInfo){
+  return {
+    type:'ADD_SUB_TEAM_SUCCESS',
+    teamId,
+    teamInfo
+  }
+}
 
+export function ADD_SUB_TEAM(teamId,teamInfo){
+  console.log('add_sub_team');
+  return function(dispatch){
+    return TeamApi.addSubTeam(teamId,teamInfo).then(response=>{
+      console.log(response);
+      dispatch(addSubTeamSuccess(teamId,response));
+    })
+  }
 }
 
 export function DELETE_TEAM(teamId,subTeamId){
@@ -54,7 +75,18 @@ export function ADD_MEMBER(teamId,memberInfo){
 }
 
 export function DELETE_MEMBER(teamId,userId){
-
+  console.log('deleteMember');
+  console.log(teamId);
+  console.log(userId);
+  return function(dispatch){
+    return TeamApi.deleteMember(teamId,userId).then(response =>{
+      console.log(response);
+      dispatch(delMemberSuccess(teamId,userId));
+    }
+  ).catch(error=>{
+    throw(error);
+    })
+  }
 }
 export function UPDATE_MEMBER(teamId,memeber){
 

@@ -15,13 +15,10 @@ class PMBody extends React.Component{
     }
   }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps);
     this.setState({teamList:nextProps.teamList,curTeam:nextProps.curTeam})
   }
 
   getMember(teamList,teamId){
-    console.log('getMember');
-    console.table(teamList);
     for( var index in teamList){
         console.log(index);
         var team = teamList[index];
@@ -43,8 +40,12 @@ class PMBody extends React.Component{
   }
 
 
-  handleSubmit(){
-
+  handleSubmit(e){
+    e.preventDefault();
+    var formData = this.props.form.getFieldsValue();
+    var actions = this.props.actions;
+    actions.ADD_SUB_TEAM(this.state.curTeam,formData);
+    this.setState({modalVisible:false});
   }
   handleTeamAdd(){
     this.setModalVisible({modalVisible:true});

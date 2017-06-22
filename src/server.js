@@ -53,10 +53,53 @@ app.post('/login', function(request, response){
 app.post('/team/:id',function(request,response){
   console.log(request.body);
   var val = request.body;
-  val.userId = '12314';
+
   console.log(val);
-  response.json(val);
+  response.json({
+    userId:'101',
+    userNickName:'liufei101',
+    userName:'刘飞101',
+    role:'组长'
+  });
 });
+
+app.post('/teamadd/:id',function(request,response){
+  console.log(request.body);
+  var val = request.body;
+
+  console.log(val);
+  response.json(
+    {teamId:'12346',
+    teamName:'数据仓库A',
+    teamMember:[
+      {
+        userId:'1',
+        userNickName:'liufei',
+        userName:'刘飞1',
+        role:'组长'
+      },
+      {
+        userId:'2',
+        userNickName:'liufei2',
+        userName:'刘飞2',
+        role:'组员'
+      },
+      {
+        userId:'3',
+        userNickName:'liufei3',
+        userName:'刘飞3',
+        role:'组员'
+      },
+      {
+        userId:'4',
+        userNickName:'liufei4',
+        userName:'刘飞4',
+        role:'组员'
+      }
+  ]});
+});
+
+
 app.get('/teams',(request,response)=>{
   console.log(request.query.userId);
   response.json(
@@ -112,7 +155,8 @@ app.get('/teams',(request,response)=>{
               userName:'刘飞12',
               role:'组员'
             }
-          ]
+          ],
+          children:[]
         }
       ]
       },
@@ -144,7 +188,8 @@ app.get('/teams',(request,response)=>{
             userName:'刘飞8',
             role:'组员'
           }
-        ]
+        ],
+        children:[]
       }
     ]
   )

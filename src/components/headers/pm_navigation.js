@@ -22,7 +22,6 @@ class Navigation extends React.Component{
 	};
 
   handleClick(e){
-
     if(e.key=="login"){
       this.setModalVisible(true);
     }else if(e.key=="logout"){
@@ -34,7 +33,6 @@ class Navigation extends React.Component{
       this.props.onNavClick(e.key,this.state.userId);
     }
   }
-
 
 	handleSubmit(e){
 		e.preventDefault();

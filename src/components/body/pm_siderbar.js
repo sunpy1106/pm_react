@@ -20,6 +20,7 @@ class  SiderBar extends React.Component{
 
 
   generateMenu(menuObj) {
+      debugger;
       let vdom = [];
       if (menuObj instanceof Array) {
           let list = [];
@@ -27,13 +28,13 @@ class  SiderBar extends React.Component{
               list.push(this.generateMenu(item));
           }
           vdom.push(list);
-      } else if(menuObj.hasOwnProperty('children')){
+      } else if(menuObj.children.length > 0){
           vdom.push(
-              <SubMenu key={menuObj.teamId} title = {menuObj.teamName}>
+              <SubMenu key={menuObj.teamId} title = {menuObj.teamName} onTitleClick={(e)=>this.props.onMenuClick(e.key)}>
                 {this.generateMenu(menuObj.children)}
               </SubMenu>
           );
-      }else{
+      }else if(menuObj.children.length == 0){
         vdom.push(
             <Menu.Item key={menuObj.teamId}>
               {menuObj.teamName}

@@ -109,8 +109,12 @@ class EditableCell extends React.Component {
   }
   onDelete = (index) => {
     const dataSource = [...this.state.dataSource];
+    debugger;
+    var userId = dataSource[index].userId;
     dataSource.splice(index, 1);
+
     this.setState({ dataSource });
+    this.props.actions.DELETE_MEMBER(this.state.curTeam,userId);
   }
 
   handleAdd = () => {
@@ -132,19 +136,14 @@ class EditableCell extends React.Component {
   handleSubmit(e){
     e.preventDefault();
     var formData = this.props.form.getFieldsValue();
-    console.log(formData);
     var actions = this.props.actions;
     actions.ADD_MEMBER(this.state.curTeam,formData);
-
     this.setState({modalVisible:false});
   }
 
   render() {
     let {getFieldProps} = this.props.form;
-    console.log("userTable props");
-    console.log(this.props);
     const dataSource  = this.state.dataSource;
-    console.table(dataSource);
     const columns = this.columns;
     return (
       <div>
