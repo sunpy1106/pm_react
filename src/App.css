@@ -8,6 +8,16 @@
   height: 80px;
 }
 
+.ant-menu-submenu-title {
+    padding: 0px;
+    font-size: 10px;
+    margin-top: 0px;
+    line-height: 1px;
+    height: 1px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .App-header {
   background-color: #222;
   height: 150px;
