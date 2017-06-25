@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {SHOW_TEAM} from '../actions';
 
 const mapStateToProps = (state) => {
-  console.log("siderbar containser");
+  console.log("siderbar container");
   console.log(state);
   return {
     teams:state.teamList

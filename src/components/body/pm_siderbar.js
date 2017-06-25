@@ -17,41 +17,36 @@ class  SiderBar extends React.Component{
       teams:nextProps.teams
     })
   }
-
-
-  generateMenu(menuObj) {
-      debugger;
-      let vdom = [];
-      if (menuObj instanceof Array) {
-          let list = [];
-          for (var item of menuObj) {
-              list.push(this.generateMenu(item));
-          }
-          vdom.push(list);
-      } else if(menuObj.children.length > 0){
-          vdom.push(
-              <SubMenu key={menuObj.teamId} title = {menuObj.teamName} onTitleClick={(e)=>this.props.onMenuClick(e.key)}>
-                {this.generateMenu(menuObj.children)}
-              </SubMenu>
+  renderMenu = (team) => {
+        //recursive rendering
+        if(team.subcats && team.subcats.length){
+          return (
+            <SubMenu key={team.teamId} title = {team.teamName} >
+              {team.subcats.map(this.renderMenu)}
+            </SubMenu>
           );
-      }else if(menuObj.children.length == 0){
-        vdom.push(
-            <Menu.Item key={menuObj.teamId}>
-              {menuObj.teamName}
+        }else{
+          return (
+            <Menu.Item key={team.teamId}>
+              {team.teamName}
             </Menu.Item>
-        );
-      }
-      return vdom;
-  }
+          );
+        }
 
+    }
+  
   render(){
-    const teams = this.props.teams;
-    const teamMenu= this.generateMenu(teams);
+    console.log('pm_siderbar');
+    let  {teams} = this.props;
+    console.log(teams);
+    console.log(this.props);
+    teams.forEach(e => e.subcats=teams.filter(el=>el.superTeamId==e.teamId));
+    teams =teams.filter(e=>e.superTeamId=='');
     return(
       <Menu mode="inline"    style={{ height: '100%' }}  onClick={( e ) => {
         this.props.onMenuClick(e.key);
       }}>
-      {teamMenu}
+      {teams.map(this.renderMenu)}
       </Menu>
     )
   }

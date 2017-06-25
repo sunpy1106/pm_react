@@ -4,7 +4,7 @@ create table if not exists `teamMember`(
   `role` varchar(4),
   `createTime` timestamp,
   primary key(`teamId`,`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 INSERT INTO `teamMember` (`teamId`, `userId`, `role`, `createTime`) VALUES
 ('10000', '20000','1',now()),
