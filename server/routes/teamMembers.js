@@ -14,4 +14,18 @@ router.get('/:id?',function(req,res,next){
   }
 
 });
+
+router.post('/:id',function(req,res,next){
+
+  TeamMember.deleteMember(req.params.id,req.body._userId,function(err,count){
+    if(err)
+    {
+      res.json(err);
+    }
+    else
+    {
+      res.json(count);
+    }
+  });
+});
 module.exports=router;

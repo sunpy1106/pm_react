@@ -11,6 +11,10 @@ var teamMember={
        console.log(teamMember.teamId);
        return db.query("Insert into teamMember(teamId,userId,role,createTime) values(?,?,?,?)",[teamMember.teamId,teamMember.userId,teamMember.role,now()],callback);
        //return db.query("insert into teamMember(Id,Title,Status) values(?,?,?)",[teamMember1.Id,teamMember1.Title,teamMember1.Status],callback);
+    },
+    deleteMember:function(teamId,userId,callback){
+      console.log('deleteMember');
+      return db.query("delete from teamMember where userId=? and teamId = ?",[userId,teamId],callback);
     }
 };
 module.exports=teamMember;

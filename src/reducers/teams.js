@@ -73,10 +73,7 @@ const updateTeamInfo=(state,action)=>{
   console.log('updateTeamInfo');
   debugger;
   switch(action.type){
-    case 'ADD_MEMBER_SUCCESS':
-      return addMember(state,action.teamId,action.memberInfo);
-    case 'DELETE_MEMBER_SUCCESS':
-      return deleteMember(state,action.teamId,action.userId);
+  
     case 'ADD_SUB_TEAM_SUCCESS':
       return addSubTeam(state,action.teamId,action.teamInfo);
   }
@@ -87,10 +84,6 @@ const teamList = (state={},action) => {
     switch(action.type){
       case 'LOAD_TEAMS_SUCCESS':
         return  Object.assign([],action.teams);
-      case 'ADD_MEMBER_SUCCESS':
-        return updateTeamInfo(state,action);
-      case 'DELETE_MEMBER_SUCCESS':
-        return updateTeamInfo(state,action);
       case 'ADD_SUB_TEAM_SUCCESS':
         return updateTeamInfo(state,action);
       default:

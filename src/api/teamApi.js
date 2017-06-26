@@ -54,7 +54,7 @@ class TeamApi{
 
   }
   static deleteMember(teamId,userId){
-    const request = new Request('http://localhost:3001/team/'+teamId, {
+    const request = new Request('http://localhost:3001/teamMembers/'+teamId, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'

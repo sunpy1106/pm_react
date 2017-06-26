@@ -51,11 +51,7 @@ class PMBody extends React.Component{
     let memberList = this.state.memberList;
     console.log('memberList');
     console.log(memberList);
-    const body = memberList !='' ?
-      <UserTable dataSource={memberList}  actions={this.props.actions} />
-    :
-      ''
-    ;
+    const body  = <UserTable dataSource={memberList}  actions={this.props.actions} />;
     return (
       <div>
         <div>

@@ -79,7 +79,7 @@ class EditableCell extends React.Component {
       dataIndex: 'operation',
       render: (text, record, index) => {
         return (
-          this.state.dataSource.length > 1 ?
+          this.state.dataSource.length > 0 ?
           (
             <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(index)}>
               <a href="#">Delete</a>
@@ -108,11 +108,10 @@ class EditableCell extends React.Component {
   onDelete = (index) => {
     const dataSource = [...this.state.dataSource];
     debugger;
-    var userId = dataSource[index].userId;
-    dataSource.splice(index, 1);
+    var userId = dataSource[index].userid;
+    var teamId = dataSource[index].teamid;
 
-    this.setState({ dataSource });
-    this.props.actions.DELETE_MEMBER(this.state.curTeam,userId);
+    this.props.actions.DELETE_MEMBER(teamId,userId);
   }
 
   handleAdd = () => {

@@ -33,10 +33,9 @@ export function addMemberSuccess(teamId,memberInfo){
   }
 }
 
-export function delMemberSuccess(teamId,userId){
+export function delMemberSuccess(userId){
   return {
     type:'DELETE_MEMBER_SUCCESS',
-    teamId,
     userId
   }
 }
@@ -86,13 +85,10 @@ export function ADD_MEMBER(teamId,memberInfo){
 }
 
 export function DELETE_MEMBER(teamId,userId){
-  console.log('deleteMember');
-  console.log(teamId);
-  console.log(userId);
   return function(dispatch){
-    return TeamApi.deleteMember(teamId,userId).then(response =>{
-      console.log(response);
-      dispatch(delMemberSuccess(teamId,userId));
+    return TeamApi.deleteMember(teamId,userId).then(() =>{
+      console.log(`delete user ${userId} in team ${teamId}`);
+      dispatch(delMemberSuccess(userId));
     }
   ).catch(error=>{
     throw(error);
