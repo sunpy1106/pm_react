@@ -90,9 +90,7 @@ class EditableCell extends React.Component {
     }];
 
     this.state = {
-      dataSource:this.props.dataSource.teamMember,
-      curTeam:this.props.dataSource.teamId,
-      count:4,
+      dataSource:this.props.dataSource,
       modalVisible:false
     };
 
@@ -123,8 +121,7 @@ class EditableCell extends React.Component {
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      dataSource:nextProps.dataSource.teamMember,
-      curTeam:nextProps.dataSource.teamId
+      dataSource:nextProps.dataSource
     })
   }
 
@@ -144,6 +141,8 @@ class EditableCell extends React.Component {
   render() {
     let {getFieldProps} = this.props.form;
     const dataSource  = this.state.dataSource;
+    console.log('dataSource');
+    console.log(dataSource);
     const columns = this.columns;
     return (
       <div>

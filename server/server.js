@@ -5,6 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors=require('cors');
 var Teams=require('./routes/teams');
+var TeamMembers = require('./routes/teamMembers');
 var app = express();
 // view engine setup
 
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/teams',Teams);
+app.use('/teamMembers',TeamMembers);
 app.use('/',Teams);
 
 

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Team=require('../models/Team');
+var TeamMember = require('../models/TeamMember');
 router.get('/:id?',function(req,res,next){
   if(req.params.id){
       Team.getTeamById(req.params.id,function(err,rows){
@@ -28,6 +29,8 @@ router.get('/:id?',function(req,res,next){
       });
   }
 });
+
+
 router.post('/',function(req,res,next){
         Team.addTeam(req.body,function(err,count){
             //console.log(req.body);

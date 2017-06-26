@@ -2,39 +2,24 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import UserTable from './pm_user_table';
 import {Form,Modal,Input,Button} from 'antd';
-
 const FormItem = Form.Item;
 
 class PMBody extends React.Component{
   constructor(props){
     super(props);
     this.state={
-      teamList:this.props.teamList,
-      curTeam:this.props.curTeam,
-      modalVisible:false
+      modalVisible:false,
+      memberList:this.props.memberList
     }
+  }
+  componentWillMount(){
+    console.log('component mount');
+
   }
   componentWillReceiveProps(nextProps){
-    this.setState({teamList:nextProps.teamList,curTeam:nextProps.curTeam})
+    console.log('componentWillReceiveProps');
+    this.setState({memberList:nextProps.memberList});
   }
-
-  getMember(teamList,teamId){
-    for( var index in teamList){
-        console.log(index);
-        var team = teamList[index];
-        if(team.teamId == teamId){
-          return team;
-        }else if(team.hasOwnProperty('children')){
-          var childTeam = this.getMember(team.children,teamId);
-          if(childTeam!=''){
-            return childTeam;
-          }
-
-        }
-    }
-    return '';
-  }
-
   setModalVisible(value){
     this.setState({modalVisible:value});
   }
@@ -60,25 +45,19 @@ class PMBody extends React.Component{
     console.log('return');
     console.log(res);
   }
+
   render(){
     let {getFieldProps} = this.props.form;
-    const teamId = this.state.curTeam;
-    const teamList = this.state.teamList.length!=0?this.getMember(this.state.teamList,teamId):'';
-    console.log('teamList');
-    console.log(teamList);
-    console.log(this.props.actions);
-    const body = teamList !='' ?
-      <UserTable dataSource={teamList}  actions={this.props.actions} />
+    let memberList = this.state.memberList;
+    console.log('memberList');
+    console.log(memberList);
+    const body = memberList !='' ?
+      <UserTable dataSource={memberList}  actions={this.props.actions} />
     :
       ''
     ;
-
     return (
       <div>
-        <div>
-          <h1>团队名称</h1>
-          <p>{teamList.teamName}</p>
-        </div>
         <div>
         <h1>团队成员及角色</h1>
           {body}
@@ -106,8 +85,7 @@ class PMBody extends React.Component{
 }
 
 PMBody.PropTypes = {
-  teamList:PropTypes.array.isRequired,
-  curTeam:PropTypes.string.isRequired,
+  memberList:PropTypes.array.isRequired,
   actions: PropTypes.object.isRequired
 }
 

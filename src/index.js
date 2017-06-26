@@ -11,7 +11,7 @@ import logger from 'redux-logger';
 
 
 const initState={
-  curTeam:'',
+  memberList:[],
   teamList:[]
 }
 const  store = createStore(reducers,initState,applyMiddleware(thunk,logger));

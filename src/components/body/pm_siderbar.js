@@ -21,7 +21,7 @@ class  SiderBar extends React.Component{
         //recursive rendering
         if(team.subcats && team.subcats.length){
           return (
-            <SubMenu key={team.teamId} title = {team.teamName} >
+            <SubMenu key={team.teamId} title = {team.teamName} onTitleClick={(e)=>this.props.onMenuClick(e.key)}>
               {team.subcats.map(this.renderMenu)}
             </SubMenu>
           );
@@ -34,7 +34,7 @@ class  SiderBar extends React.Component{
         }
 
     }
-  
+
   render(){
     console.log('pm_siderbar');
     let  {teams} = this.props;

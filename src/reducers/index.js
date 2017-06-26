@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
 import teamList from './teams'
-import curTeam from './curTeam'
+import memberList from './teamDetail'
 
 export default combineReducers({
   teamList,
-  curTeam
+  memberList
 });

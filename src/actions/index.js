@@ -1,12 +1,23 @@
 import TeamApi from '../api/teamApi';
 
-export const SHOW_TEAM= (teamId) => (
-  {
-    type:'SHOW_TEAM',
-    teamId
-  }
-)
 
+export function loadMemberSuccess(members){
+  return {
+    type:'LOAD_MEMBER_SUCCESS',
+    members
+  }
+}
+
+export function SHOW_TEAM  (teamId){
+  return function(dispatch){
+      return TeamApi.getTeamMembers(teamId).then(members =>{
+        dispatch(loadMemberSuccess(members));
+      }).catch(error => {
+        throw(error);
+      })
+    }
+
+}
 export function loadTeamsSuccess(teams){
   return {
     type:'LOAD_TEAMS_SUCCESS',
