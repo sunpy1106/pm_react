@@ -1,8 +1,10 @@
 import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 import React, { Component } from 'react';
-import {Form,Modal} from 'antd';
-
+import {Form,Modal,Select,Radio} from 'antd';
+import TeamApi from '../../api/teamApi';
+const Option = Select.Option;
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 
 class EditableCell extends React.Component {
   state = {
@@ -91,7 +93,8 @@ class EditableCell extends React.Component {
 
     this.state = {
       dataSource:this.props.dataSource,
-      modalVisible:false
+      modalVisible:false,
+      allUserList:[]
     };
 
     console.log('datasource:');
@@ -115,7 +118,13 @@ class EditableCell extends React.Component {
   }
 
   handleAdd = () => {
+    console.log('handle add');
     this.setState({modalVisible:true});
+    TeamApi.getAllUsers().then(response=> {
+      this.setState({allUserList:response});
+    })
+
+
   }
 
   componentWillReceiveProps(nextProps){
@@ -130,18 +139,28 @@ class EditableCell extends React.Component {
 
 
   handleSubmit(e){
+    console.log("handle submit");
     e.preventDefault();
     var formData = this.props.form.getFieldsValue();
     var actions = this.props.actions;
-    actions.ADD_MEMBER(this.state.curTeam,formData);
+    console.log(formData);
+    console.log(this.props);
+
     this.setState({modalVisible:false});
   }
 
   render() {
-    let {getFieldProps} = this.props.form;
+    const { getFieldDecorator } = this.props.form;
     const dataSource  = this.state.dataSource;
     console.log('dataSource');
     console.log(dataSource);
+    console.log(this.state);
+    const userList = this.state.allUserList;
+    console.log(userList);
+    const userSelect = userList.map(user => (
+      <Option key={user.userId} value={user.userId} > {user.userNickName} </Option>
+    ));
+    console.log(userSelect);
     const columns = this.columns;
     return (
       <div>
@@ -152,11 +171,23 @@ class EditableCell extends React.Component {
                   onOk={ ()=> this.setModalVisible(false)} okText="关闭" >
           <Form horizontal onSubmit={this.handleSubmit.bind(this)} >
             <FormItem label="姓名">
-              <Input placeholder="请输入成员姓名" {...getFieldProps('r_userName')} />
+            {getFieldDecorator('_userId')(
+              <Select mode="multiple" placeholder="请选择要新增的成员"
+                optionFilterProp="children"
+                filterOption={(input, option) => option.props.children.toString().toLowerCase().indexOf(input.toString().toLowerCase()) >= 0}>
+                {userSelect}
+              </Select>
+            )}
             </FormItem>
+
             <FormItem label="角色">
-              <Input type="teamLeader" placeholder="请输入成员角色" {...getFieldProps('r_role')} />
-            </FormItem>
+            {getFieldDecorator('_role')(
+              <RadioGroup>
+                <Radio value={0}>组长</Radio>
+                <Radio value={1}>组员</Radio>
+              </RadioGroup>
+          )}
+        </FormItem>
             <Button type="primary" htmlType="submit" >提交</Button>
           </Form>
         </Modal>

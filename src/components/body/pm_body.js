@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import UserTable from './pm_user_table';
-import {Form,Modal,Input,Button} from 'antd';
+import {Form,Modal,Input,Button,Select} from 'antd';
 const FormItem = Form.Item;
-
+const Option = Select.Option;
 class PMBody extends React.Component{
   constructor(props){
     super(props);
@@ -69,9 +69,7 @@ class PMBody extends React.Component{
 						<FormItem label="团队名称">
 							<Input placeholder="请输入团队名称" {...getFieldProps('r_teamName')} />
 						</FormItem>
-						<FormItem label="团队负责人">
-							<Input type="teamLeader" placeholder="请输入负责人" {...getFieldProps('r_teamLeader')} />
-						</FormItem>
+
 						<Button type="primary" htmlType="submit" >提交</Button>
 					</Form>
 				</Modal>

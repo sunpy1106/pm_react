@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var cors=require('cors');
 var Teams=require('./routes/teams');
 var TeamMembers = require('./routes/teamMembers');
+var Users = require('./routes/users');
 var app = express();
 // view engine setup
 
@@ -20,7 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/teams',Teams);
 app.use('/teamMembers',TeamMembers);
+app.use('/users',Users);
 app.use('/',Teams);
+
 
 
 var debug = require('debug')('rkdemo:server');

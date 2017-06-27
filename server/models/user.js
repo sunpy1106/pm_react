@@ -1,6 +1,7 @@
 var db=require('../dbconnection');
 var User={
     getAllUsers:function(callback){
+      console.log('getAllUsers');
       return db.query("Select * from User",callback);
     },
     getUserById:function(id,callback){

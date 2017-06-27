@@ -20,6 +20,17 @@ class TeamApi{
     });
   }
 
+  static getAllUsers(teamId){
+    const request  = new Request('http://localhost:3001/users' ,{
+      method:'GET'
+    });
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
   static addMember(teamId,memberInfo){
     const request = new Request('http://localhost:3001/team/'+teamId, {
       method: 'POST',
