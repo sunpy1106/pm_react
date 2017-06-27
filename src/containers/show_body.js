@@ -6,7 +6,8 @@ const mapStateToProps = (state) => {
   console.log('pmbody');
   console.log(state);
   return {
-    memberList:state.memberList
+    memberList:state.memberList,
+    curTeam:state.curTeam
   }
 
 }

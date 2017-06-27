@@ -32,12 +32,12 @@ class TeamApi{
   }
 
   static addMember(teamId,memberInfo){
-    const request = new Request('http://localhost:3001/team/'+teamId, {
+    const request = new Request('http://localhost:3001/teams/'+teamId, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(memberInfo)
+      body: JSON.stringify({persons:memberInfo})
     });
 
     return fetch(request).then(response => {

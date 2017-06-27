@@ -94,7 +94,8 @@ class EditableCell extends React.Component {
     this.state = {
       dataSource:this.props.dataSource,
       modalVisible:false,
-      allUserList:[]
+      allUserList:[],
+      curTeam:this.props.curTeam
     };
 
     console.log('datasource:');
@@ -124,12 +125,12 @@ class EditableCell extends React.Component {
       this.setState({allUserList:response});
     })
 
-
   }
 
   componentWillReceiveProps(nextProps){
     this.setState({
-      dataSource:nextProps.dataSource
+      dataSource:nextProps.dataSource,
+      curTeam:nextProps.curTeam
     })
   }
 
@@ -145,7 +146,19 @@ class EditableCell extends React.Component {
     var actions = this.props.actions;
     console.log(formData);
     console.log(this.props);
-
+    console.log(this.state);
+    var teamMembers=[];
+    var curTeam = this.state.curTeam;
+    debugger;
+    formData._userId.forEach(function(id){
+      teamMembers.push({
+        userId:id,
+        roleId:formData._role,
+        teamId:curTeam
+      });
+    })
+    console.log(teamMembers);
+    actions.ADD_MEMBER(curTeam,teamMembers);
     this.setState({modalVisible:false});
   }
 

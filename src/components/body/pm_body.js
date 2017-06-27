@@ -9,7 +9,8 @@ class PMBody extends React.Component{
     super(props);
     this.state={
       modalVisible:false,
-      memberList:this.props.memberList
+      memberList:this.props.memberList,
+      curTeam:this.props.curTeam
     }
   }
   componentWillMount(){
@@ -18,7 +19,7 @@ class PMBody extends React.Component{
   }
   componentWillReceiveProps(nextProps){
     console.log('componentWillReceiveProps');
-    this.setState({memberList:nextProps.memberList});
+    this.setState({memberList:nextProps.memberList,curTeam:nextProps.curTeam});
   }
   setModalVisible(value){
     this.setState({modalVisible:value});
@@ -51,7 +52,7 @@ class PMBody extends React.Component{
     let memberList = this.state.memberList;
     console.log('memberList');
     console.log(memberList);
-    const body  = <UserTable dataSource={memberList}  actions={this.props.actions} />;
+    const body  = <UserTable dataSource={memberList} curTeam={this.state.curTeam} actions={this.props.actions} />;
     return (
       <div>
         <div>

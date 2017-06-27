@@ -44,16 +44,22 @@ router.post('/',function(req,res,next){
         });
 });
 router.post('/:id',function(req,res,next){
-  Team.deleteAll(req.body,function(err,count){
-    if(err)
-    {
-      res.json(err);
-    }
-    else
-    {
-      res.json(count);
-    }
-  });
+  console.log(req.body);
+  if(req.body.hasOwnProperty('persons')){
+    Team.addMember(req.body,function(err,count){
+      if(err)
+      {
+        res.json(err);
+      }
+      else
+      {
+        res.json(count);
+      }
+    });
+  }else if(req.body.hasOwnProperty('')){
+
+  }
+
 });
 router.delete('/:id',function(req,res,next){
   Team.deleteTeam(req.params.id,function(err,count){

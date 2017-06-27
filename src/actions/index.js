@@ -1,17 +1,19 @@
 import TeamApi from '../api/teamApi';
 
 
-export function loadMemberSuccess(members){
+export function loadMemberSuccess(members,curTeam){
   return {
     type:'LOAD_MEMBER_SUCCESS',
-    members
+    members,
+    curTeam
   }
 }
 
 export function SHOW_TEAM  (teamId){
+  console.log('SHOW_TEAM');
   return function(dispatch){
       return TeamApi.getTeamMembers(teamId).then(members =>{
-        dispatch(loadMemberSuccess(members));
+        dispatch(loadMemberSuccess(members,teamId));
       }).catch(error => {
         throw(error);
       })
@@ -77,9 +79,9 @@ export function ADD_MEMBER(teamId,memberInfo){
   console.log(teamId);
   console.log(memberInfo);
   return function(dispatch){
-    return TeamApi.addMember(teamId,memberInfo).then(response=>{
-      console.log(response);
-      dispatch(addMemberSuccess(teamId,response));
+    return TeamApi.addMember(teamId,memberInfo).then(()=>{
+
+      dispatch(SHOW_TEAM(teamId));
     })
   }
 }
