@@ -19,11 +19,7 @@ var Team={
         members.push([member.teamId,member.userId,member.roleId,member.createTime]);
       })
       console.log(`members: ${members}` )
-      return db.query("insert into teamMember(teamId,userId,role,createTime) values ?",[members],function(err){
-        if(err){
-          throw err;
-        }
-      });
+      return db.query("insert into teamMember(teamId,userId,role,createTime) values ?",[members],callback);
     }
 };
 module.exports=Team;

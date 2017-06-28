@@ -25,7 +25,7 @@ class App extends Component {
         </Layout>
       </Content>
         <Footer style={{ textAlign: 'center' }}>
-          实施管理平台 ©2017 由中国建设银行数据仓库项目组创建
+          实施管理平台 ©2017 
         </Footer>
       </Layout>
 

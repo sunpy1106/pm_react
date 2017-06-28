@@ -62,29 +62,28 @@ class EditableCell extends React.Component {
     super(props);
     this.columns = [{
       title: '登录名',
-      dataIndex: 'userNickName',
-      width: '30%',
-      render: (text, record, index) => (
-        <EditableCell
-          value={text}
-          onChange={this.onCellChange(index, 'name')}
-        />
-      ),
+      dataIndex: 'userName',
+      width: '30%'
     }, {
       title: '姓名',
-      dataIndex: 'userName',
+      dataIndex: 'userNickName',
     }, {
       title: '角色',
       dataIndex: 'role',
+      render:(text,record,index)=>{
+        return (
+          text=='0'?"组长":"组员"
+        )
+      }
     }, {
       title: '操作',
-      dataIndex: 'operation',
+      dataIndex: '操作',
       render: (text, record, index) => {
         return (
           this.state.dataSource.length > 0 ?
           (
-            <Popconfirm title="Sure to delete?" onConfirm={() => this.onDelete(index)}>
-              <a href="#">Delete</a>
+            <Popconfirm title="确认删除?" onConfirm={() => this.onDelete(index)}>
+              <a href="#">删除</a>
             </Popconfirm>
           ) : null
         );
@@ -157,7 +156,7 @@ class EditableCell extends React.Component {
         teamId:curTeam
       });
     })
-    console.log(teamMembers);
+    console.log(`teamMembet to add ${teamMembers}`);
     actions.ADD_MEMBER(curTeam,teamMembers);
     this.setState({modalVisible:false});
   }
@@ -178,7 +177,7 @@ class EditableCell extends React.Component {
     return (
       <div>
         <Button className="editable-add-btn" onClick={this.handleAdd}>添加成员</Button>
-        <Table bordered dataSource={dataSource} columns={columns} />
+        <Table bordered dataSource={dataSource} columns={columns} rowKey="userName"/>
         <Modal title="添加成员" wrapClassName="vertical-center-modal" visible={this.state.modalVisible}
                   onCancel={()=> this.setModalVisible(false)}
                   onOk={ ()=> this.setModalVisible(false)} okText="关闭" >
