@@ -62,10 +62,12 @@ export function addSubTeamSuccess(teamId,teamInfo){
 
 export function ADD_SUB_TEAM(teamId,teamInfo){
   console.log('add_sub_team');
+  console.log(teamId);
+  console.log(teamInfo);
   return function(dispatch){
     return TeamApi.addSubTeam(teamId,teamInfo).then(response=>{
       console.log(response);
-      dispatch(addSubTeamSuccess(teamId,response));
+      CLICK_NAV('team','');
     })
   }
 }
@@ -80,7 +82,6 @@ export function ADD_MEMBER(teamId,memberInfo){
   console.log(memberInfo);
   return function(dispatch){
     return TeamApi.addMember(teamId,memberInfo).then(()=>{
-
       dispatch(SHOW_TEAM(teamId));
     })
   }

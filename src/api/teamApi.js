@@ -49,12 +49,17 @@ class TeamApi{
   }
 
   static addSubTeam(teamId,teamInfo){
-    const request = new Request('http://localhost:3001/teamadd/'+teamId, {
+    const request = new Request('http://localhost:3001/teams/'+teamId, {
       method: 'POST',
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body: JSON.stringify(teamInfo)
+      body: JSON.stringify({
+        teams:[{
+        superTeamId:teamId,
+        teamName:teamInfo.teamName
+      }]}
+    )
     });
 
     return fetch(request).then(response => {

@@ -56,8 +56,17 @@ router.post('/:id',function(req,res,next){
         res.json(count);
       }
     });
-  }else if(req.body.hasOwnProperty('')){
-
+  }else if(req.body.hasOwnProperty('teams')){
+    Team.addTeam(req.body,function(err,count){
+        //console.log(req.body);
+        if(err)
+        {
+            res.json(err);
+        }
+        else{
+            res.json(req.body);//or return count for 1 & 0
+        }
+    });
   }
 
 });

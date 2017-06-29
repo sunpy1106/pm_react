@@ -6,12 +6,18 @@ var Team={
     getTeamById:function(id,callback){
         return db.query("select * from Team where teamId=?",[id],callback);
     },
-    addTeam:function(Team,callback){
-       console.log("inside service");
-       console.log(Team.teamId);
-       return db.query("Insert into Team(teamId,teamName,superTeamId,createTime) values(?,?,?,?)",[Team.teamId,Team.TeamName,Team.superTeamId,'now()' ],callback);
+
+    addTeam:function(teamList,callback){
+
+       var teams = [];
+       teamList.teams.forEach(function(team){
+         teams.push([team.teamName,team.superTeamId]);
+       })
+      
+       return db.query("Insert into Team(teamId,teamName,superTeamId,createTime) select max(teamId+1),?,?,now() from team ",[teams ],callback);
        //return db.query("insert into Team(Id,Title,Status) values(?,?,?)",[Team1.Id,Team1.Title,Team1.Status],callback);
     },
+
     addMember:function(memberList,callback){
       var members =[];
       console.log(memberList);

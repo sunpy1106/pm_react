@@ -68,7 +68,7 @@ class PMBody extends React.Component{
 									onOk={ ()=> this.setModalVisible(false)} okText="关闭" >
 					<Form horizontal onSubmit={this.handleSubmit.bind(this)} >
 						<FormItem label="团队名称">
-							<Input placeholder="请输入团队名称" {...getFieldProps('r_teamName')} />
+							<Input placeholder="请输入团队名称" {...getFieldProps('teamName')} />
 						</FormItem>
 
 						<Button type="primary" htmlType="submit" >提交</Button>
