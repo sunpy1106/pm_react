@@ -37,15 +37,19 @@ class PMBody extends React.Component{
     this.setModalVisible({modalVisible:true});
   }
   handleTeamDel(){
+    var actions = this.props.actions;
+    var curTeam = this.state.curTeam;
     var res = Modal.confirm({
       title: 'Confirm',
       content: '删除此团队？',
       okText: '确认',
       cancelText: '取消',
+      onOk(){
+        actions.DELETE_TEAM(curTeam);
+      }
     });
-    console.log(res);
-    var actions = this.props.actions;
-    actions.DELETE_TEAM(this.state.curTeam);
+
+
   }
 
   render(){

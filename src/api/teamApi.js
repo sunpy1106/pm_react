@@ -47,6 +47,23 @@ class TeamApi{
     });
 
   }
+  static deleteTeam(teamId){
+    const request = new Request('http://localhost:3001/teams/'+ teamId,{
+      method:'POST',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      body:JSON.stringify({
+        _method:'delete'
+      })
+    });
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+
+  }
 
   static addSubTeam(teamId,teamInfo){
     const request = new Request('http://localhost:3001/teams/'+teamId, {
@@ -61,7 +78,6 @@ class TeamApi{
       }]}
     )
     });
-
     return fetch(request).then(response => {
       return response.json();
     }).catch(error => {

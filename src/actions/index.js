@@ -74,7 +74,11 @@ export function ADD_SUB_TEAM(teamId,teamInfo){
 }
 
 export function DELETE_TEAM(teamId){
-
+  return function(dispatch){
+    return TeamApi.deleteTeam(teamId).then(()=>{
+      dispatch(CLICK_NAV('team',''));
+    })
+  }
 }
 
 export function ADD_MEMBER(teamId,memberInfo){

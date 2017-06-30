@@ -17,7 +17,9 @@ var Team={
        return db.query("Insert into Team(teamId,teamName,superTeamId) values ? ",[teams],callback);
        //return db.query("insert into Team(Id,Title,Status) values(?,?,?)",[Team1.Id,Team1.Title,Team1.Status],callback);
     },
-
+    deleteTeam:function(teamId,callback){
+      return db.query("delete from team where teamId =?",[teamId],callback);
+    },
     addMember:function(memberList,callback){
       var members =[];
       console.log(memberList);

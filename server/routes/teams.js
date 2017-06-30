@@ -67,6 +67,15 @@ router.post('/:id',function(req,res,next){
             res.json(req.body);//or return count for 1 & 0
         }
     });
+  }else if(req.body.hasOwnProperty('_method') && req.body._method=='delete'){
+    var teamId = req.params.id;
+    Team.deleteTeam(teamId,function(err,count){
+      if(err){
+        res.json(err);
+      }else{
+        res.json(count);
+      }
+    });
   }
 
 });
