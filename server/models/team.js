@@ -8,13 +8,13 @@ var Team={
     },
 
     addTeam:function(teamList,callback){
-
+      console.log(teamList);
        var teams = [];
        teamList.teams.forEach(function(team){
-         teams.push([team.teamName,team.superTeamId]);
+         teams.push([Math.floor(Math.random() * 100000).toString(),team.teamName.toString(),team.superTeamId.toString()]);
        })
-      
-       return db.query("Insert into Team(teamId,teamName,superTeamId,createTime) select max(teamId+1),?,?,now() from team ",[teams ],callback);
+       console.log(Math.floor(Math.random() * 100000).toString());
+       return db.query("Insert into Team(teamId,teamName,superTeamId) values ? ",[teams],callback);
        //return db.query("insert into Team(Id,Title,Status) values(?,?,?)",[Team1.Id,Team1.Title,Team1.Status],callback);
     },
 

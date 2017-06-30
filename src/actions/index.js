@@ -42,6 +42,7 @@ export function delMemberSuccess(userId){
   }
 }
 export function CLICK_NAV  (query,userId){
+  console.log('click_nac');
   return function(dispatch){
       return TeamApi.getAllTeams(userId).then(teams =>{
         dispatch(loadTeamsSuccess(teams));
@@ -67,12 +68,12 @@ export function ADD_SUB_TEAM(teamId,teamInfo){
   return function(dispatch){
     return TeamApi.addSubTeam(teamId,teamInfo).then(response=>{
       console.log(response);
-      CLICK_NAV('team','');
+      dispatch(CLICK_NAV('team',''));
     })
   }
 }
 
-export function DELETE_TEAM(teamId,subTeamId){
+export function DELETE_TEAM(teamId){
 
 }
 

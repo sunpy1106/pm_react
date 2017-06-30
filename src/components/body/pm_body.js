@@ -43,8 +43,9 @@ class PMBody extends React.Component{
       okText: '确认',
       cancelText: '取消',
     });
-    console.log('return');
     console.log(res);
+    var actions = this.props.actions;
+    actions.DELETE_TEAM(this.state.curTeam);
   }
 
   render(){
