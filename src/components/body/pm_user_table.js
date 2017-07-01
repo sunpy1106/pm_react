@@ -167,7 +167,10 @@ class EditableCell extends React.Component {
     console.log('dataSource');
     console.log(dataSource);
     console.log(this.state);
-    const userList = this.state.allUserList;
+    console.log('get userList');
+    const userList = this.state.allUserList.filter(function(e){
+      return this.filter(item=>item.userid===e.userId).length<1;
+    },dataSource);
     console.log(userList);
     const userSelect = userList.map(user => (
       <Option key={user.userId} value={user.userId} > {user.userNickName} </Option>
