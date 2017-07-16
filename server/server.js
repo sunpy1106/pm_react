@@ -7,6 +7,7 @@ var cors=require('cors');
 var Teams=require('./routes/teams');
 var TeamMembers = require('./routes/teamMembers');
 var Users = require('./routes/users');
+var Sessions = require('./routes/sessions');
 var app = express();
 // view engine setup
 
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/teams',Teams);
 app.use('/teamMembers',TeamMembers);
 app.use('/users',Users);
+app.use('/session',Sessions);
 app.use('/',Teams);
 
 
