@@ -17,7 +17,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
-
+.hidden {
+  display:none;
+}
 .App-header {
   background-color: #222;
   height: 150px;
